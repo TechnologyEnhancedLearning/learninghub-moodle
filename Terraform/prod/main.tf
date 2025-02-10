@@ -17,6 +17,12 @@ resource "azurerm_storage_share" "storage_share" {
   quota                = var.StorageQuota
 }
 
+resource "azurerm_storage_share" "storage_share_theme" {
+  name                 = "moodletheme"
+  storage_account_name = azurerm_storage_account.storage_account.name
+  quota                = var.StorageQuota
+}
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.ClusterName
   location            = azurerm_resource_group.learningHubMoodleResourceGroup.location
@@ -26,7 +32,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name       = "default"
     node_count = var.ClusterNodeCount
     vm_size    = var.ClusterNodeSize
-    temporary_name_for_rotation = "tmpnodepool2"
+    temporary_name_for_rotation = "tmpnodepool1"
   }
   identity {
     type = "SystemAssigned"
