@@ -117,8 +117,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow Azure Load Balancer inbound traffic"
     destinationAddressPrefix =  "10.0.1.0/24"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "*"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "*"
+    destination_port_ranges =  []
     direction = "Inbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-healthprobe-in-10-0-1-0-24-v11"
     priority =  100
@@ -133,8 +133,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow MI internal inbound traffic"
     destinationAddressPrefix =  "10.0.1.0/24"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "*"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "*"
+    destination_port_ranges =  []
     direction =  "Inbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-internal-in-10-0-1-0-24-v11"
     priority =  101
@@ -149,8 +149,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow communication with Azure Active Directory over https"
     destinationAddressPrefix =  "AzureActiveDirectory"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "443"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "443"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-aad-out-10-0-1-0-24-v11"
     priority =  101
@@ -165,8 +165,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow communication with the One DS Collector over https"
     destinationAddressPrefix =  "OneDsCollector"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "443"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "443"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-onedsc-out-10-0-1-0-24-v11"
     priority =  102
@@ -181,8 +181,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow MI internal outbound traffic"
     destinationAddressPrefix =  "10.0.1.0/24"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "*"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "*"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-internal-out-10-0-1-0-24-v11"
     priority =  103
@@ -197,8 +197,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow outbound communication with storage over HTTPS"
     destinationAddressPrefix =  "Storage.northeurope"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "443"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "443"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-strg-p-out-10-0-1-0-24-v11"
     priority =  104
@@ -213,8 +213,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow outbound communication with storage over HTTPS"
     destinationAddressPrefix =  "Storage.westeurope"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "443"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "443"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-strg-s-out-10-0-1-0-24-v11"
     priority =  105
@@ -229,8 +229,8 @@ resource "azurerm_network_security_group" "nsg" {
     description =  "Allow AzureCloud outbound https traffic"
     destinationAddressPrefix =  "AzureCloud"
     destinationAddressPrefixes =  []
-    destinationAddressPrefixes =  "443"
-    destinationAddressPrefixes =  []
+    destination_port_range =  "443"
+    destination_port_ranges =  []
     direction =  "Outbound"
     name =  "Microsoft.Sql-managedInstances_UseOnly_mi-optional-azure-out-10-0-1-0-24"
     priority =  100
