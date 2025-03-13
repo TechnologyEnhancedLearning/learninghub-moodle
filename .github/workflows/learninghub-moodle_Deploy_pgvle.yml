@@ -289,7 +289,7 @@ jobs:
       - name: Create analytics workspace
         id: create_analytics_workspace
         run: |
-          az monitor log-analytics workspace create --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --location ${{ vars.AZURE_RESOURCE_GROUP_LOCATION }}
+          az monitor log-analytics workspace create --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --location "${{ vars.AZURE_RESOURCE_GROUP_LOCATION }}"
           WORKSPACE_ID=$(az monitor log-analytics workspace show --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --query id -o tsv)
           echo "workspace_id=$WORKSPACE_ID" >> $GITHUB_OUTPUT
 
