@@ -76,7 +76,7 @@ jobs:
   create_persistent_storage:
     needs: terraform
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Create persistent volume and persistent volume claim'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -142,7 +142,7 @@ jobs:
   build_and_push_docker_image:
     needs: create_persistent_storage
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Build and push learninghub moodle docker image'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -181,7 +181,7 @@ jobs:
   deploy_learninghubmoodle_to_cluster:
     needs: build_and_push_docker_image
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Deploy learninghub moodle to AKS cluster'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -237,7 +237,7 @@ jobs:
   fix_recommendations:
     needs: deploy_learninghubmoodle_to_cluster
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Ensure Azure recommendations are fixed'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
