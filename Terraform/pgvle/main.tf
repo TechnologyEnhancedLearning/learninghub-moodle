@@ -38,7 +38,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name                         = "default"
     vm_size                      = "Standard_B4ms"
     temporary_name_for_rotation  = "tmpnodepool1"
-	auto_scaling_enabled         = true
+    auto_scaling_enabled         = true
     min_count                    = 2
     max_count                    = 3
     only_critical_addons_enabled = true
@@ -76,6 +76,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "user_node_pool" {
   max_count             = 5
   node_count            = 2
   mode                  = "User"
+  temporary_name_for_rotation  = "tmpusernodepool1"
   tags = {
     Environment = var.Environment
   }
