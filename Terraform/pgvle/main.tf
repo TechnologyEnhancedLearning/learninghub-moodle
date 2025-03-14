@@ -283,7 +283,7 @@ resource "azurerm_subnet_route_table_association" "subnet_route_table_associatio
 }
 
 resource "azurerm_mssql_managed_instance" "sqlmi" {
-  name = "learninghub-moodle-sql-mi-pgvle"
+  name = var.SqlmiName
   resource_group_name = azurerm_resource_group.learningHubMoodleResourceGroup.name
   location = azurerm_resource_group.learningHubMoodleResourceGroup.location
   license_type = "BasePrice"
@@ -310,7 +310,7 @@ resource "azurerm_mssql_managed_database" "sqldb" {
 }
 
 resource "azurerm_redis_cache" "moodle_cache" {
-  name                = "moodle-cache-pgvle"
+  name                = var.RedisName
   resource_group_name = azurerm_resource_group.learningHubMoodleResourceGroup.name
   location = azurerm_resource_group.learningHubMoodleResourceGroup.location
   capacity            = 2
