@@ -13,7 +13,7 @@ ARG PLUGIN_SET
 ENV PLUGIN_SET=$PLUGIN_SET
 
 # Install plugins dynamically
-RUN for plugin in $PLUGIN_SET; do \
+RUN for plugin in $(echo $PLUGIN_SET | tr ',' ' '); do \
     wget -q https://moodle.org/plugins/download.php/$plugin.zip -O /tmp/$plugin.zip && \
     unzip -q /tmp/$plugin.zip -d /var/www/html/local/plugins && \
     rm -f /tmp/$plugin.zip; \
