@@ -180,7 +180,7 @@ jobs:
 
       - name: Setup Plugins
         run: |
-          for plugin in $PLUGIN_SET; do \
+          for plugin in ${{ vars.PLUGIN_SET }}; do \
             echo $plugin && \
             wget -q https://moodle.org/plugins/download.php/$plugin.zip -O /tmp/$plugin.zip && \
             unzip -q /tmp/$plugin.zip -d /var/www/html/local/plugins && \
