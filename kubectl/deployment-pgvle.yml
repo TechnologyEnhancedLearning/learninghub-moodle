@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: learninghubmoodledev
+  name: learninghubmoodlepgvle
   namespace: learninghubmoodle
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: learninghubmoodledev
+      app: learninghubmoodlepgvle
   template:
     metadata:
       labels:
-        app: learninghubmoodledev
+        app: learninghubmoodlepgvle
     spec:
       containers:
       - name: learninghubmoodleimage
-        image: learninghubmoodlecrdev.azurecr.io/learninghubmoodleimage:latest
+        image: learninghubmoodlecrpgvle.azurecr.io/learninghubmoodleimage:latest
         imagePullPolicy: Always
         resources:
           requests:

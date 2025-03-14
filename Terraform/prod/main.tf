@@ -246,7 +246,7 @@ resource "azurerm_subnet_route_table_association" "subnet_route_table_associatio
 }
 
 resource "azurerm_mssql_managed_instance" "sqlmi" {
-  name = "learninghub-moodle-sql-mi-prod"
+  name = var.SqlmiName
   resource_group_name = azurerm_resource_group.learningHubMoodleResourceGroup.name
   location = azurerm_resource_group.learningHubMoodleResourceGroup.location
   license_type = "BasePrice"
@@ -267,7 +267,7 @@ resource "azurerm_mssql_managed_database" "sqldb" {
 }
 
 resource "azurerm_redis_cache" "moodle_cache" {
-  name                = "moodle-cache-prod"
+  name                = var.RedisName
   resource_group_name = azurerm_resource_group.learningHubMoodleResourceGroup.name
   location = azurerm_resource_group.learningHubMoodleResourceGroup.location
   capacity            = 2
@@ -275,4 +275,22 @@ resource "azurerm_redis_cache" "moodle_cache" {
   sku_name            = "Standard"
   non_ssl_port_enabled = true
   minimum_tls_version = "1.2"
+}
+
+resource "azurerm_communication_service" "CommunicationService" {
+  name                = "CommunicationServiceProd"
+  resource_group_name = azurerm_resource_group.learningHubMoodleResourceGroup.name
+  data_location       = "UK"
+}
+
+resource "azurerm_email_communication_service" "EmailCommunicationService" {
+  name                     = "EmailCommunicationServiceProd"
+  resource_group_name      = azurerm_resource_group.learningHubMoodleResourceGroup.name
+  data_location            = "UK"
+}
+
+resource "azurerm_email_communication_service_domain" "EmailCommunicationServiceDomain" {
+  name                = "moodle.learninghub.nhs.uk"
+  email_service_id    = azurerm_email_communication_service.EmailCommunicationService.id
+  domain_management   = "CustomerManaged"
 }

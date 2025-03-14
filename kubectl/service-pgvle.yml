@@ -5,7 +5,7 @@ metadata:
   namespace: learninghubmoodle
 spec:
   selector:
-    app: learninghubmoodledev
+    app: learninghubmoodlepgvle
   ports:
     - protocol: TCP
       port: 80
