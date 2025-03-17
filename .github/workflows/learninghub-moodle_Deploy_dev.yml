@@ -178,14 +178,14 @@ jobs:
       - name: Log in to Azure Container Registry
         run: az acr login --name ${{ vars.AZURE_CONTAINER_REGISTRY_NAME }}
 
-      - name: Setup Plugins
-        run: |
-          for plugin in ${{ vars.PLUGIN_SET }}; do \
-            echo $plugin && \
-            wget https://moodle.org/plugins/download.php/$plugin.zip -O /tmp/$plugin.zip && \
-            unzip /tmp/$plugin.zip -d /var/www/html/local/plugins && \
-            rm -f /tmp/$plugin.zip; \
-          done
+      # - name: Setup Plugins
+      #   run: |
+      #     for plugin in ${{ vars.PLUGIN_SET }}; do \
+      #       echo $plugin && \
+      #       wget https://moodle.org/plugins/download.php/$plugin.zip -O /tmp/$plugin.zip && \
+      #       unzip /tmp/$plugin.zip -d /var/www/html/local/plugins && \
+      #       rm -f /tmp/$plugin.zip; \
+      #     done
 
       - name: Build and push Docker image
         run: |
