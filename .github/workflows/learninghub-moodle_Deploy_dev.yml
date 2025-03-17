@@ -184,7 +184,7 @@ jobs:
           for plugin in ${{ vars.PLUGIN_SET }}; do \
             echo $plugin && \
             wget https://moodle.org/plugins/download.php/$plugin && \
-            unzip $(basename $plugin) -d local/plugins && \
+            unzip $(basename $plugin) -d admin/tool && \
             rm -f $(basename $plugin); \
           done
 
