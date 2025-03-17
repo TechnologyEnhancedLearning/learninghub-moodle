@@ -23,6 +23,7 @@ $CFG->dataroot  = 'DATA-ROOT';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
+$logouturl = $CFG->logouturl = 'index.php';
 
 $CFG->tool_generator_users_password = 'TOOL-GENERATOR-PASSWORD';
 
