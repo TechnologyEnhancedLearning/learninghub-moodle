@@ -183,8 +183,8 @@ jobs:
           for plugin in ${{ vars.PLUGIN_SET }}; do \
             echo $plugin && \
             wget https://moodle.org/plugins/download.php/$plugin && \
-            unzip $plugin -d /var/www/html/local/plugins && \
-            rm -f $plugin; \
+            unzip $(basename $plugin) -d /var/www/html/local/plugins && \
+            rm -f $(basename $plugin); \
           done
 
       - name: Build and push Docker image
