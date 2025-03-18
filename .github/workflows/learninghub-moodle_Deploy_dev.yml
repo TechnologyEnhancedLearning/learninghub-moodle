@@ -180,11 +180,11 @@ jobs:
 
       - name: Setup Plugins
         run: |
-          mkdir local/plugins
           for plugin in ${{ vars.PLUGIN_SET }}; do \
-            echo $plugin && \
-            wget https://moodle.org/plugins/download.php/$plugin && \
-            unzip $(basename $plugin) -d admin/tool && \
+            IFS=":" && \
+            read folder zipfile <<< "$plugin" && \
+            wget https://moodle.org/plugins/download.php/$zipfile && \
+            unzip $(basename $plugin) -d $folder && \
             rm -f $(basename $plugin); \
           done
 
