@@ -184,8 +184,8 @@ jobs:
             IFS=":" && \
             read folder zipfile <<< "$plugin" && \
             wget https://moodle.org/plugins/download.php/$zipfile && \
-            unzip $(basename $plugin) -d $folder && \
-            rm -f $(basename $plugin); \
+            unzip $(basename $zipfile) -d $folder && \
+            rm -f $(basename $zipfile); \
           done
 
       - name: Build and push Docker image
