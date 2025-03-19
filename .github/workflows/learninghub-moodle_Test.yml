@@ -1,8 +1,6 @@
-name: Run tests for LearningHub-Moodle when create PR for main
+name: Run tests for LearningHub-Moodle
 on:
   pull_request:
-    branches:
-      - main
   
 permissions:
   id-token: write
@@ -38,7 +36,7 @@ jobs:
 
   PHPUnit:
     runs-on: ${{ matrix.os }}
-    environment: prod-test
+    environment: dev-test
     services:
       exttests:
         image: moodlehq/moodle-exttests
@@ -52,6 +50,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # MySQL builds always run with the lowest PHP supported version.
           - os: ubuntu-22.04
             php: 8.2
             extensions:
@@ -89,7 +88,7 @@ jobs:
         env:
           dbtype: ${{ matrix.db }}
         run: |
-          echo "pathtophp=$(which php)" >> $GITHUB_ENV Inject installed pathtophp to env. The template config needs it.
+          echo "pathtophp=$(which php)" >> $GITHUB_ENV # Inject installed pathtophp to env. The template config needs it.
           cp .github/workflows/config-template.php config.php
           mkdir ../moodledata
           sudo locale-gen en_AU.UTF-8

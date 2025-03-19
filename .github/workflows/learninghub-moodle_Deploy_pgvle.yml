@@ -80,7 +80,7 @@ jobs:
   create_persistent_storage:
     needs: terraform
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Create persistent volume and persistent volume claim'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -113,6 +113,7 @@ jobs:
 
       - name: Attach ACR to cluster
         run: az aks update -n ${{ vars.AZURE_CLUSTER_NAME }} -g ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --attach-acr ${{ vars.AZURE_CONTAINER_REGISTRY_NAME }}
+        continue-on-error: true
 
       - name: Get SQL ManagedInstance resource ID
         id: get_mi_id
@@ -146,7 +147,7 @@ jobs:
   build_and_push_docker_image:
     needs: create_persistent_storage
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Build and push learninghub moodle docker image'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -185,7 +186,7 @@ jobs:
   deploy_learninghubmoodle_to_cluster:
     needs: build_and_push_docker_image
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Deploy learninghub moodle to AKS cluster'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -241,7 +242,7 @@ jobs:
   fix_recommendations:
     needs: deploy_learninghubmoodle_to_cluster
     runs-on: ubuntu-latest
-    environment: ${{ vars.AZURE_ENVIRONMENT }}
+    environment: pgvle
     name: 'Ensure Azure recommendations are fixed'
     env:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -292,7 +293,7 @@ jobs:
       - name: Create analytics workspace
         id: create_analytics_workspace
         run: |
-          az monitor log-analytics workspace create --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --location ${{ vars.AZURE_RESOURCE_GROUP_LOCATION }}
+          az monitor log-analytics workspace create --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --location "${{ vars.AZURE_RESOURCE_GROUP_LOCATION }}"
           WORKSPACE_ID=$(az monitor log-analytics workspace show --resource-group ${{ vars.AZURE_RESOURCE_GROUP_NAME }} --workspace-name LearningHubWorkspace --query id -o tsv)
           echo "workspace_id=$WORKSPACE_ID" >> $GITHUB_OUTPUT
 
